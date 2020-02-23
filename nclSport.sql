@@ -15,13 +15,6 @@ CREATE TABLE IF NOT EXISTS `ncl_users` (
   PRIMARY KEY (`userID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
 
-INSERT INTO 'ncl_users' ('userID', 'forename', 'surname', 'dob', 'email', 'gender',
-  'userType', 'passwordHash', 'membershipEXP', 'postcode', 'addrL2', 'addrL1') VALUES
-  ('1', 'Lee', 'Walton', '16/02/1999', 'lee.walton2014@outlook.com', 'Male',
-    '1', '$2y$12$AhcoeDloQQj4CPwwWqA30.SCI0ZIq1Gs3FlYeH5i4UCHA2QrQDjli', '', 'DH87RH', 'Consett', '17 New Black Street'),
-  ('1', 'Adam', 'Carr', '12/01/2000', 'admb445@gmail.com', 'Male',
-    '1', '$2y$12$AhcoeDloQQj4CPwwWqA30.SCI0ZIq1Gs3FlYeH5i4UCHA2QrQDjli', '', 'NE81AQ', 'Gateshead', '202 High Street');
-
 DROP TABLE IF EXISTS `ncl_account_type`;
 CREATE TABLE IF NOT EXISTS `ncl_account_type` (
   `accountTypeID` varchar(10) NOT NULL default ``,
@@ -29,80 +22,76 @@ CREATE TABLE IF NOT EXISTS `ncl_account_type` (
   PRIMARY KEY (`accountTypeID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `ncl_events`;
+CREATE TABLE IF NOT EXISTS `ncl_events` (
+  `eventID` int(10) NOT NULL auto_increment,
+  `eventTitle` varchar(100) default NULL,
+  `eventDescription` varchar(1000) default NULL,
+  `eventDate` date default NULL,
+  `eventTime` time default NULL,
+  `eventDuration` time default NULL,
+  `facilityID` int(10) default NULL,
+  `eventBookingLimit` int(10) default NULL,
+  PRIMARY KEY (`eventID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+
+DROP TABLE IF EXISTS `ncl_facilities`;
+CREATE TABLE IF NOT EXISTS `ncl_facilities` (
+  `facilityID` int(10) NOT NULL auto_increment,
+  `description` varchar(100) default NULL,
+  PRIMARY KEY (`tagID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+
+DROP TABLE IF EXISTS `ncl_bookings`;
+CREATE TABLE IF NOT EXISTS `ncl_bookings` (
+  `bookingID` int(10) NOT NULL auto_increment,
+  `eventID` int(10) default NULL,
+  `userID` int(10) default NULL,
+  PRIMARY KEY (`bookingID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+
+DROP TABLE IF EXISTS `ncl_cms_content`;
+CREATE TABLE IF NOT EXISTS `ncl_cms_content` (
+  `contentID` int(10) NOT NULL auto_increment,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  `publisher` varchar(30) default NULL,
+  PRIMARY KEY (`tagID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+
+DROP TABLE IF EXISTS `ncl_cms_tags`;
+CREATE TABLE IF NOT EXISTS `ncl_cms_tags` (
+  `tagID` int(10) NOT NULL auto_increment,
+  `tagName` varchar(30) default NULL,
+  PRIMARY KEY (`tagID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+
+
+
+
+INSERT INTO 'ncl_users' ('userID', 'forename', 'surname', 'dob', 'email', 'gender',
+  'userType', 'passwordHash', 'membershipEXP', 'postcode', 'addrL2', 'addrL1') VALUES
+  ('1', 'Lee', 'Walton', '16/02/1999', 'lee.walton2014@outlook.com', 'Male',
+    '1', '$2y$12$AhcoeDloQQj4CPwwWqA30.SCI0ZIq1Gs3FlYeH5i4UCHA2QrQDjli', '', 'DH87RH', 'Consett', '17 New Black Street'),
+  ('1', 'Adam', 'Carr', '12/01/2000', 'admb445@gmail.com', 'Male',
+    '1', '$2y$12$AhcoeDloQQj4CPwwWqA30.SCI0ZIq1Gs3FlYeH5i4UCHA2QrQDjli', '', 'NE81AQ', 'Gateshead', '202 High Street');
+
 INSERT INTO 'ncl_account_type' ('accountTypeID', 'role') VALUES
 ('a1', 'user'),
 ('a2', 'member'),
 ('a3', 'staff'),
 ('a4', 'admin');
 
+INSERT INTO 'ncl_events' ('eventID', 'eventTitle', 'eventDescription', 'eventDate', 'eventTime', 'facilityID') VALUES
+('1', 'Yoga', 'The art of movement, you will learn from the start the basics and will be led by the best instructor in the NE.', '12/07/20', '15:00', '00:45', '1'),
+('1', 'Squash', 'Advanced squash, you will have access to the best squash coach to help you improove your technique.', '12/07/20', '13:00', '01:30', '2');
 
-
-
-
-
-
-DROP TABLE IF EXISTS `aa_event_stage`;
-CREATE TABLE IF NOT EXISTS `aa_event_stage` (
-  `stageID` varchar(10) NOT NULL default ``,
-  `stageNumber` varchar(7) default NULL,
-  `stageCapacity` varchar(7) default NULL,
-  PRIMARY KEY (`stageID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-INSERT INTO 'aa_event_stage' ('stageID', 'stageNumber', 'stageCapacity') VALUES
-('s1', '1', '11000'),
-('s2', '2', '500'),
-('s3', '3', '500'),
-('s4', '4', '5000'),
-('s5', '5', '2000');
-
-DROP TABLE IF EXISTS `aa_customers`;
-CREATE TABLE IF NOT EXISTS `aa_customers` (
-  `custID` int(10) NOT NULL auto_increment,
-  `custForename` varchar(255) default NULL,
-  `custSurname` varchar(255) default NULL,
-  `custEmail` varchar(255) default NULL,
-  `custUsername` varchar(30) default NULL,
-  `custPasswordHash` varchar(255) default NULL,
-  PRIMARY KEY (`custID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=979;
-
-DROP TABLE IF EXISTS `aa_sales`;
-CREATE TABLE IF NOT EXISTS `aa_sales` (
-  `saleID` int(10) NOT NULL auto_increment,
-  `custID` varchar(10) default NULL,
-  `eventID` varchar(10) default NULL,
-  `saleQuantity` int(6) default NULL,
-  `orderNumber` varchar(255) default NULL,
-  `orderDate` date default NULL,
-  PRIMARY KEY (`saleID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=979;
-
-DROP TABLE IF EXISTS `aa_cart`;
-CREATE TABLE IF NOT EXISTS `aa_cart` (
-  `cartItemID` int(10) NOT NULL auto_increment,
-  `custID` varchar(10) default NULL,
-  `eventID` varchar(10) default NULL,
-  `cartItemQuantity` int(6) default NULL,
-  PRIMARY KEY (`cartItemID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
-
-DROP TABLE IF EXISTS `aa_blog`;
-CREATE TABLE IF NOT EXISTS `aa_blog` (
-  `postID` int(10) NOT NULL auto_increment,
-  `postTitle` varchar(255) default NULL,
-  `postBody` varchar(10000) default NULL,
-  `postDate` date default NULL,
-  PRIMARY KEY (`postID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
-
-DROP TABLE IF EXISTS `aa_admins`;
-CREATE TABLE IF NOT EXISTS `aa_admins` (
-  `adminID` int(10) NOT NULL auto_increment,
-  `username` varchar(255) default NULL,
-  `passwordHash` varchar(255) default NULL,
-  `forename` varchar(225) default NULL,
-  `surname` varchar(225) default NULL,
-  PRIMARY KEY (`adminID`),
-  UNIQUE KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=100;
+INSERT INTO 'ncl_cms_tags' ('tagID', 'tagName') VALUES
+('1', 'index'),
+('2', 'about'),
+('3', 'Nutrition'),
+('4', 'News');
