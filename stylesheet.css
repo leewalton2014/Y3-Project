@@ -1,6 +1,14 @@
 /*Main*/
-
-
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: "Tw Cen MT", "Arial", sans-serif;
+    margin: 0;
+}
+img{
+  width: auto;
+}
 
 
 
@@ -18,3 +26,51 @@
 
 
 /*CMS*/
+
+
+/*Nav*/
+nav{
+    width: 100%;
+    background-color: #FF7171;
+    position: fixed;
+    height: auto;
+    overflow: auto;
+    float: left;
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav a{
+    display: block;
+    float: left;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+}
+nav a.home {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+nav a:hover{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+nav a.emph{
+    font-weight: bold;
+    background-color: #454545;
+}
+nav a.logo:hover{
+    background-color: #000000;
+}
+nav a.logo{
+    width: 10%;
+    height: auto;
+}
+nav a.logo img{
+    width: 10%;
+    height: ;
+}
