@@ -6,9 +6,7 @@ body{
     font-family: "Tw Cen MT", "Arial", sans-serif;
     margin: 0;
 }
-img{
-  width: auto;
-}
+
 
 
 
@@ -32,10 +30,10 @@ img{
 nav{
     width: 100%;
     background-color: #FF7171;
-    position: fixed;
     height: auto;
     overflow: auto;
     float: left;
+    padding-top: 0;
 }
 nav ul{
     list-style-type: none;
@@ -71,6 +69,31 @@ nav a.logo{
     height: auto;
 }
 nav a.logo img{
-    width: 10%;
+    width: 100%;
     height: ;
+}
+
+/*Footer*/
+footer{
+  width: 100%;
+  background-color: #FF7171;
+  height: auto;
+  overflow: auto;
+  float: left;
+}
+.footer_pane{
+  margin: 0;
+  padding: 0;
+  width: 32%;
+  float: left;
+}
+.footer_pane img {
+  width: 100%;
+}
+
+/*Main Body*/
+.mainBody{
+  width: 100%;
+  height: auto;
+  float: left;
 }
