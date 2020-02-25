@@ -103,4 +103,9 @@ footer{
 .login-background{
   background-image: url("assets/img/loginBackground.jpg");
 }
-*/
+/*Column Templates*/
+#col-2-width{
+  width: 50%;
+  height: auto;
+  float: left;
+}
