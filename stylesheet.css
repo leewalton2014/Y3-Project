@@ -93,9 +93,10 @@ footer{
 
 /*Main Body*/
 .mainBody{
-  width: 100%;
   height: auto;
-  float: left;
+  margin: auto;
+  max-width: 1250px;
+  padding-bottom: 30px;
 }
 
 /*Login*/
@@ -104,8 +105,23 @@ footer{
   background-image: url("assets/img/loginBackground.jpg");
 }
 /*Column Templates*/
-#col-2-width{
+.col-2-width{
   width: 50%;
   height: auto;
   float: left;
+}
+.width100{
+  width: 100%;
+  height: auto;
+  float: left;
+}
+.big-button {
+  background-color: #FF7171;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
 }
