@@ -7,37 +7,38 @@ makeNav();
 echo "<div class='mainBody'>
   <h1>Sign Up</h1>
   <p>Enter your information to sign up to booking system.</p>
-  <form action='login-process.php' method='POST' enctype='multipart/form-data' id='login-form'>
+  <form action='signup-process.php' method='POST' enctype='multipart/form-data' id='signup-form'>
     <div class='col-2-width'>
-    <label for='forename'>Forename</label>
-    <input placeholder='Forename' type='text' name='forename' class='username'/>
-    <label for='surname'>Surname</label>
+    <label for='forname' class='signup-label'>Forname</label>
+    <input placeholder='Forname' type='text' name='forname'/>
+    <label for='surname' class='signup-label'>Surname</label>
     <input placeholder='Surname' type='text' name='surname'/>
-    <label for='email'>Email</label>
+    <label for='email' class='signup-label'>Email</label>
     <input placeholder='Email' type='text' name='email'/>
-    <label for='username'>Username</label>
+    <label for='username' class='signup-label'>Username</label>
     <input placeholder='Username' type='text' name='username'/>
-    <label for='password'>Password</label>
-    <input placeholder='Password' type='text' name='password'/>
-    <label for='passwordchk'>Confirm Password</label>
-    <input placeholder='Confirm Password' type='text' name='passwordchk'/>
+    <label for='password' class='signup-label'>Password</label>
+    <input placeholder='Password' type='password' name='password'/>
+    <label for='passwordchk' class='signup-label'>Confirm Password</label>
+    <input placeholder='Confirm Password' type='password' name='passwordchk'/>
     </div>
     <div class='col-2-width'>
-    <label for='dob'>Date Of Birth</label>
+    <label for='dob' class='signup-label'>Date Of Birth</label>
     <input type='date' name='dob'/>
-    <label for='gender'>Gender</label>
+    <label for='gender' class='signup-label'>Gender</label>
     <select id='gender' name='gender'>
     <option value='Male'>Male</option>
     <option value='Female'>Female</option>
     </select>
     <input type='hidden' name='userType' value='2'/>
-    <label for='addr1'>Address Line 1</label>
+    <label for='addr1' class='signup-label'>Address Line 1</label>
     <input placeholder='Address Line 1' type='text' name='addr1'/>
-    <label for='addr2'>Address Line 2</label>
+    <label for='addr2' class='signup-label'>Address Line 2</label>
     <input placeholder='Address Line 2' type='text' name='addr2'/>
-    <label for='postcode'>Postcode</label>
+    <label for='postcode' class='signup-label'>Postcode</label>
     <input placeholder='Postcode' type='text' name='postcode'/>
     </div>
+    <br>
     <input class='logInSubmit' type='submit'/><br>
     <p>Allready signed up? <a href='login-form.php'>Login</a></p>
 </div>";

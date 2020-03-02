@@ -125,3 +125,12 @@ footer{
   display: inline-block;
   font-size: 20px;
 }
+/*Signup Form*/
+#signup-form input {
+  width: 45%;
+  float: left;
+}
+.signup-label {
+  width: 45%;
+  float: left;
+}

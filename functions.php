@@ -3,7 +3,7 @@
 function getConnection() {
     try {
         $connection = new PDO('mysql:host=localhost;dbname=unn_w17007224',
-            'unn_w17007224', 'password');
+            'unn_w17007224', 'db2020lww');
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $connection;
     } catch (Exception $e) {
@@ -18,11 +18,12 @@ function setSessionPath(){
     //session_start();
 }
 //sanitise input
-function sanitise_input($input){
-    $input = trim($input);
-    $input = stripslashes($input);
-    $input = htmlspecialchars($input);
-    return $input;
+function sanitise_input($var){
+    $output = filter_has_var(INPUT_POST, $var) ? $_POST[$var] : null;
+    $output = trim($output);
+    $output = stripslashes($output);
+    $output = htmlspecialchars($output);
+    return $output;
 }
 //Start Webpage
 function startHTML($title, $description){
