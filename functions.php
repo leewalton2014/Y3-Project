@@ -13,9 +13,9 @@ function getConnection() {
 //Sessions
 //Function to start sessions and set path
 function setSessionPath(){
-    //$currentPath = getcwd();
-    //ini_set('session.save_path', $currentPath.'/sessionData');
-    //session_start();
+    $currentPath = getcwd();
+    ini_set('session.save_path', $currentPath.'/sessionData');
+    session_start();
 }
 //sanitise input
 function sanitise_input($var){
@@ -54,9 +54,14 @@ function makeNav(){
       <li><a href='about-us.php'>About Us</a></li>
       <li><a href='cms.php'>Content</a></li>
       <li><a href='dashboard.php'>Dashboard</a></li>
-  </ul>
-  </nav>
 makeNAV;
+  $content .= "\n";
+  //Logout button float right
+  if (isset($_SESSION['user']) && $_SESSION['user']){
+    $content .= "<li><a href='logout-process.php'>Logout</a></li>";
+  }
+  $content .= "</ul>
+    </nav>";
   $content .= "\n";
   echo $content;
 }

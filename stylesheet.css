@@ -134,3 +134,25 @@ footer{
   width: 45%;
   float: left;
 }
+/*Events Table*/
+#eventsTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#eventsTable td, #eventsTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#eventsTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#eventsTable tr:hover {background-color: #ddd;}
+
+#eventsTable th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  background-color: #FF7171;
+  color: white;
+}
