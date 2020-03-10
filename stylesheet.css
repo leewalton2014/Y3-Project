@@ -156,3 +156,29 @@ footer{
   background-color: #FF7171;
   color: white;
 }
+
+/*Timetable formatting columns*/
+.timetable {
+  width: 100%;
+  height: auto;
+  float: left;
+}
+.timetable-column {
+  width: 14%;
+  float: left;
+  height: auto;
+}
+.timetable-heading {
+  border-left: 5px solid red;
+}
+.week-button {
+  background-color: #FF7171;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  float: left;
+}
