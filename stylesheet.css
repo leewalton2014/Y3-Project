@@ -135,21 +135,21 @@ footer{
   float: left;
 }
 /*Events Table*/
-#eventsTable {
+#table-basic{
   border-collapse: collapse;
   width: 100%;
 }
 
-#eventsTable td, #eventsTable th {
+#table-basic td, #table-basic th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#eventsTable tr:nth-child(even){background-color: #f2f2f2;}
+#table-basic tr:nth-child(even){background-color: #f2f2f2;}
 
-#eventsTable tr:hover {background-color: #ddd;}
+#table-basic tr:hover {background-color: #ddd;}
 
-#eventsTable th {
+#table-basic th {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
