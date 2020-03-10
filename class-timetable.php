@@ -23,8 +23,9 @@ echo "<table id='eventsTable'>
 <th>Location</th>
 </tr>";
 //while ($weekdays >= 7){
+$weekdays = $weekdays + 1;
   while ($rowObj = $queryResult->fetchObject()){
-    $weekdays = $weekdays - 1;
+
     echo "<tr>";
     echo "<td>{$rowObj->eventTitle}</td>";
     echo "<td>{$rowObj->eventDate}</td>";
