@@ -40,6 +40,7 @@ echo "<div class='mainBody'>
     </div>
     <br>
     <input class='logInSubmit' type='submit'/><br>
+    </form>
     <p>Allready signed up? <a href='login-form.php'>Login</a></p>
 </div>";
 makeFooter();

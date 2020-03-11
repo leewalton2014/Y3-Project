@@ -43,7 +43,8 @@ echo "</select>
     <label for='limit' class='event-label'>Max booking capacity</label>
     <input type='number' value='{$event->eventBookingLimit}' name='limit'/>
     <input class='addEventSubmit' value='Update Info' type='submit'/><br>
-</div>";
+</div>
+</form>";
 
 
 

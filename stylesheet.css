@@ -37,7 +37,7 @@ nav{
 }
 nav ul{
     list-style-type: none;
-    margin: 0;
+    margin: auto;
     padding: 0;
 }
 nav a{
@@ -48,6 +48,7 @@ nav a{
     text-decoration: none;
     text-align: center;
     font-size: 16px;
+    margin: auto;
 }
 nav a.home {
     background-color: #FFFFFF;
@@ -70,9 +71,16 @@ nav a.logo{
 }
 nav a.logo img{
     width: 100%;
-    height: ;
+    height: auto;
 }
-
+/*Title*/
+.title {
+  width: 100%;
+  float: left;
+  height: auto;
+  text-align: center;
+  background-color: #ddd;
+}
 /*Footer*/
 footer{
   width: 100%;
@@ -110,6 +118,11 @@ footer{
   height: auto;
   float: left;
 }
+.col-1-width {
+  width: 100%;
+  height: auto;
+  float: left;
+}
 .width100{
   width: 100%;
   height: auto;
@@ -125,13 +138,40 @@ footer{
   display: inline-block;
   font-size: 20px;
 }
+/*forms*/
+input[type=text], select, input[type=date], input[type=time], input[type=number], input[type=password]  {
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  background-color: #FF7171;
+  color: white;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
 /*Signup Form*/
 #signup-form input {
-  width: 45%;
+  width: 50%;
   float: left;
 }
 .signup-label {
-  width: 45%;
+  width: 50%;
+  float: left;
+}
+/*Event Form*/
+#newevent-form input {
+  width: 50%;
+  float: left;
+}
+.event-label {
+  width: 50%;
   float: left;
 }
 /*Events Table*/
@@ -169,7 +209,7 @@ footer{
   height: auto;
 }
 .timetable-heading {
-  border-left: 5px solid red;
+  border-left: 5px solid #FF7171;
 }
 .week-button {
   background-color: #FF7171;

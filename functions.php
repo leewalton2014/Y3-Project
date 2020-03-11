@@ -66,6 +66,16 @@ makeNAV;
   $content .= "\n";
   echo $content;
 }
+//Title Bar
+function makeTitle($title){
+  $content = <<< makeTITLE
+  <div class='title'>
+  <h1>$title</h1>
+  </div>
+makeTITLE;
+  $content .= "\n";
+  echo $content;
+}
 //Footer
 function makeFooter(){
   $content = <<< makeFOOTER

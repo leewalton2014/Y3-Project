@@ -3,6 +3,7 @@ include 'functions.php';
 setSessionPath();
 startHTML('User Dashboard','Access your user account');
 makeNav();
+makeTitle('Dashboard');
 echo "<div class='mainBody'>";
 if (isset($_SESSION['user']) && $_SESSION['user']){//Session active
 $username = $_SESSION['userName'];
