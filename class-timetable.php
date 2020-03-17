@@ -6,6 +6,7 @@ makeNav();
 makeTitle('Class Timetable');
 echo "<div class='mainBody'>";
 $currentDate = date("yy/m/d");
+$dayOfWeek = date("l", strtotime($currentDate));
 $weekdays = 7;
 echo "<div class='timetable'>";
 while ($weekdays > 0){
@@ -21,6 +22,7 @@ while ($weekdays > 0){
     echo "<div class='timetable-column'>";
     echo "<div class='timetable-heading'>";
     echo "<h2>$currentDate</h2>";
+    echo "<h3>$dayOfWeek</h3>";
     echo "</div>";
     echo "</div>";
   }else{
@@ -43,6 +45,7 @@ while ($weekdays > 0){
         echo "<p>{$rowObj->eventTime}</p>";
         echo "<p>{$rowObj->eventDuration}</p>";
         echo "<p>{$rowObj->description}</p>";
+        echo "<a href='booking-process.php?eventID={$rowObj->eventID}'>Book Now</a>";
         echo "</div>";
     }
     echo "</div>";//end column

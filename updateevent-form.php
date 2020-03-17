@@ -13,7 +13,7 @@ WHERE eventID = '$eventID'";
 $dbConn = getConnection();
 $queryResult = $dbConn->query($getEventQuery);
 $event = $queryResult->fetchObject();
-echo "<form action='newevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
+echo "<form action='updateevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
     <div class='col-1-width'>
     <input type='hidden' value='$eventID' name='eventid'/>
     <label for='title' class='event-label'>Title</label>
