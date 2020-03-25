@@ -16,39 +16,32 @@ $user = $queryResult->fetchObject();
 
 echo "<form action='update-userprocess.php' method='POST' enctype='multipart/form-data' id='update_member'>
 <div class='col-2-width'>
+<input type='hidden' name='userID' value='{$user->userID}'/>
 <label for='forname' class='signup-label'>Forname</label>
 <input value='{$user->forename}' type='text' name='forname'/>
 <label for='surname' class='signup-label'>Surname</label>
 <input value='{$user->surname}' type='text' name='surname'/>
 <label for='email' class='signup-label'>Email</label>
-<input value='Email' type='text' name='email'/>
+<input value='{$user->email}' type='text' name='email'/>
 <label for='username' class='signup-label'>Username</label>
-<input value='Username' type='text' name='username'/>
-<label for='password' class='signup-label'>Password</label>
-<input value='Password' type='password' name='password'/>
-<label for='passwordchk' class='signup-label'>Confirm Password</label>
-<input value='Confirm Password' type='password' name='passwordchk'/>
+<input value='{$user->username}' type='text' name='username'/>
+<label for='dob' class='signup-label'>Date Of Birth</label>
+<input type='date' value='{$user->dob}' name='dob'/>
 </div>
 <div class='col-2-width'>
-<label for='dob' class='signup-label'>Date Of Birth</label>
-<input type='date' name='dob'/>
 <label for='gender' class='signup-label'>Gender</label>
 <select id='gender' name='gender'>
 <option value='Male'>Male</option>
 <option value='Female'>Female</option>
 </select>
-<input type='hidden' name='userType' value='2'/>
 <label for='addr1' class='signup-label'>Address Line 1</label>
-<input value='Address Line 1' type='text' name='addr1'/>
+<input value='{$user->addrL1}' type='text' name='addr1'/>
 <label for='addr2' class='signup-label'>Address Line 2</label>
-<input value='Address Line 2' type='text' name='addr2'/>
+<input value='{$user->addrL2}' type='text' name='addr2'/>
 <label for='postcode' class='signup-label'>Postcode</label>
-<input value='Postcode' type='text' name='postcode'/>
+<input value='{$user->postcode}' type='text' name='postcode'/>
 </div>
 <input class='updateUser' value='Update' type='submit'/>";
-
-
-echo "<p>$userID</p>";
 
 
 echo "</div>";

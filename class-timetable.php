@@ -45,7 +45,9 @@ while ($weekdays > 0){
         echo "<p>{$rowObj->eventTime}</p>";
         echo "<p>{$rowObj->eventDuration}</p>";
         echo "<p>{$rowObj->description}</p>";
+        if (isset($_SESSION['user']) && $_SESSION['user']){//Session active
         echo "<a href='booking-process.php?eventID={$rowObj->eventID}'>Book Now</a>";
+        }
         echo "</div>";
     }
     echo "</div>";//end column
