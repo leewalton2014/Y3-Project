@@ -18,7 +18,7 @@ echo "<form action='update-userprocess.php' method='POST' enctype='multipart/for
 <div class='col-2-width'>
 <input type='hidden' name='userID' value='{$user->userID}'/>
 <label for='forname' class='signup-label'>Forname</label>
-<input value='{$user->forename}' type='text' name='forname'/>
+<input value='{$user->forename}' type='text' name='forename'/>
 <label for='surname' class='signup-label'>Surname</label>
 <input value='{$user->surname}' type='text' name='surname'/>
 <label for='email' class='signup-label'>Email</label>
@@ -41,7 +41,8 @@ echo "<form action='update-userprocess.php' method='POST' enctype='multipart/for
 <label for='postcode' class='signup-label'>Postcode</label>
 <input value='{$user->postcode}' type='text' name='postcode'/>
 </div>
-<input class='updateUser' value='Update' type='submit'/>";
+<input class='updateUser' value='Update' type='submit'/>
+</form>";
 
 
 echo "</div>";

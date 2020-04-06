@@ -5,11 +5,43 @@ startHTML('Users','Update user info');
 makeNav();
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Users</h1>";
+echo "<h1>Update User Type and Membership</h1>";
 
 $userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
 
-echo "<p>$userID</p>";
+
+$getUsersQuery = "SELECT userID, forename, surname, username, userType, email, dob, membershipEXP, postcode, addrL2, addrL1
+FROM ncl_users INNER JOIN ncl_account_type ON ncl_users.userType = ncl_account_type.accountTypeID
+WHERE userID = '$userID'";
+$getUserTypes = "SELECT accountTypeID, role
+FROM ncl_account_type";
+
+
+$dbConn = getConnection();
+$queryResult = $dbConn->query($getUsersQuery);
+$userTypes = $dbConn->query($getUserTypes);
+$user = $queryResult->fetchObject();
+
+echo "<form action='update-userprocess.php' method='POST' enctype='multipart/form-data' id='update_member'>
+<div class='col-2-width'>
+<input type='hidden' name='userID' value='{$user->userID}'/>
+<label for='acctype' class='signup-label'>Account Type</label>
+<select id='acctype' name='acctype'>";
+while ($userType = $userTypes->fetchObject()){
+  if ($user->userType == $userType->accountTypeID){
+    echo "<option value='{$userType->accountTypeID}' selected='selected'>{$userType->role}</option>";
+  }else{
+    echo "<option value='{$userType->accountTypeID}'>{$userType->role}</option>";
+  }
+}
+
+
+echo "</select>
+<label for='expdate' class='signup-label'>Membership Expiration</label>
+<input type='date' value='{$user->membershipEXP}' name='expdate'/>
+<input class='updateUser' value='Update' type='submit'/>
+</div>
+</form>";
 
 
 
