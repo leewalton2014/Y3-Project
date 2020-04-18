@@ -3,9 +3,10 @@ include 'functions.php';
 setSessionPath();
 startHTML('Users','Update user info');
 makeNav();
+makeTitle('Update User Type and Membership');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Update User Type and Membership</h1>";
+
 
 $userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
 
@@ -21,8 +22,8 @@ $dbConn = getConnection();
 $queryResult = $dbConn->query($getUsersQuery);
 $userTypes = $dbConn->query($getUserTypes);
 $user = $queryResult->fetchObject();
-
-echo "<form action='update-userprocess.php' method='POST' enctype='multipart/form-data' id='update_member'>
+echo "<h2>{$user->username}</h2>";
+echo "<form action='updateroles-process.php' method='POST' enctype='multipart/form-data' id='update_member'>
 <div class='col-2-width'>
 <input type='hidden' name='userID' value='{$user->userID}'/>
 <label for='acctype' class='signup-label'>Account Type</label>

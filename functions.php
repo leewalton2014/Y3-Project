@@ -37,6 +37,7 @@ function startHTML($title, $description){
         <title>$title</title>
         <link rel='stylesheet' type='text/css' href='stylesheet.css'>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <script src='//cdn.ckeditor.com/4.14.0/full/ckeditor.js'></script>
     </head>
     <body>
 startHTML;
