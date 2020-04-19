@@ -5,7 +5,13 @@ startHTML('Sign Up Now','Sign up to booking system');
 makeNav();
 makeTitle('Compose Post');
 //Signup form
+$dbConn = getConnection();
+$getTags = "SELECT tagID, tagName
+FROM ncl_cms_tags";
+$tags = $dbConn->query($getTags);
+
 echo "<div class='mainBody'>
+  <a href='manage-cms.php' class='big-button'>Content List</a><br>
   <form action='cms-compose-process.php' method='POST' enctype='multipart/form-data' id='cms-compose'>
     <div class='col-2-width'>
     <label for='title' class='cms'>Title </label>
@@ -13,10 +19,13 @@ echo "<div class='mainBody'>
     </div>
     <div class='col-2-width'>
     <label for='tag' class='cms'>Tag </label>
-    <select id='tag' name='tag'>
-    <option value='1'>index</option>
-    <option value='2'>about</option>
-    </select>
+    <select id='tag' name='tag'>";
+
+while ($tag = $tags->fetchObject()){
+    echo "<option value='{$tag->tagID}'>{$tag->tagName}</option>";
+  }
+
+echo "</select>
     </div>
     <textarea name='editor1' id='editor1' rows='20' cols='80'></textarea>
     <script>

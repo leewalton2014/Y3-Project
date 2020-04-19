@@ -138,6 +138,10 @@ footer{
   display: inline-block;
   font-size: 20px;
 }
+.big-button:hover{
+    background-color: #ddd;
+    color: #000000;
+}
 /*forms*/
 input[type=text], select, input[type=date], input[type=time], input[type=number], input[type=password], input[type=submit]  {
   padding: 12px 20px;
