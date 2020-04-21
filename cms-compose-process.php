@@ -14,8 +14,7 @@ $contentTitle = sanitise_input('title');
 $contentBody = sanitise_input('editor1');
 $contentTag = sanitise_input('tag');
 
-//HASH PASSWORD
-$password = password_hash($password, PASSWORD_DEFAULT);
+
 //INSERT QUERY
 $insertQry = "INSERT INTO ncl_cms_content (publisher, postDate, postTime, version, contentTitle, contentBody, contentTag)
 VALUES ('$publisher','$postDate','$postTime','$version','$contentTitle', '$contentBody', '$contentTag')";
