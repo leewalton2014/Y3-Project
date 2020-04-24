@@ -6,9 +6,7 @@ makeNav();
 makeTitle('Content');
 echo "<div class='mainBody'>";
 
-$dbConn = getConnection()
-;
-
+$dbConn = getConnection();
 if (isset($_REQUEST['tagID'])){
   //query filtered by tag
   $tagID = isset($_REQUEST['tagID']) ? $_REQUEST['tagID'] : null;

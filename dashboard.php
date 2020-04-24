@@ -18,9 +18,13 @@ echo "<p>YOU SUCCESSFULLY LOGGED IN</p>";
 echo "<p>Welcome $username</p>
 <a href='newevent-form.php' class='big-button'>New Event</a><br>
 <a href='manage-events.php' class='big-button'>Manage Events</a><br>
-<a href='viewuser-bookings.php' class='big-button'>Your Bookings</a><br>
 <a href='view-users.php' class='big-button'>View Users</a><br>
-<a href='manage-cms.php' class='big-button'>Manage Content</a><br>";
+<a href='manage-cms.php' class='big-button'>Manage Content</a><br>
+
+<a href='viewuser-bookings.php' class='big-button'>Your Bookings</a><br>
+<a href='update-userinfo.php?userID=$userid' class='big-button'>Update Account Info</a><br>
+<a href='update-password-form.php' class='big-button'>Change Password</a><br>";
+
 
 }else{
 header('Location: login-form.php');

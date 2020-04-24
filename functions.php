@@ -51,8 +51,8 @@ function makeNav(){
     <ul>
       <li><a class='logo' href=''><img src='assets/img/NS-White-Small.png' alt='logo'></a></li>
       <li><a href='index.php'>Home</a></li>
-      <li><a href='class-timetable.php'>Classes</a></li>
-      <li><a href='facilities.php'>Facilities</a></li>
+      <li><a href='class-timetable.php'>Timetable</a></li>
+      <li><a href='class-list.php'>Classes</a></li>
       <li><a href='about-us.php'>About Us</a></li>
       <li><a href='cms.php'>Content</a></li>
       <li><a href='dashboard.php'>Dashboard</a></li>
