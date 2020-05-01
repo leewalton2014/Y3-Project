@@ -21,6 +21,16 @@ body{
 
 /*Booking*/
 
+/*Class List*/
+.class-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  align-items: stretch;
+}
 
 
 
@@ -28,10 +38,13 @@ body{
 
 /*CMS*/
 .content-list {
+  display: flex;
+  flex-wrap: wrap;
   width: 80%;
   float: left;
   box-sizing: border-box;
   padding: 5px 10px;
+  align-items: stretch;
 }
 .tag-list {
   width: 20%;
@@ -44,6 +57,7 @@ body{
   transition: 0.3s;
   box-sizing: border-box;
   padding: 20px 20px;
+  align-items: stretch;
 
 }
 .content-card:hover {
