@@ -20,7 +20,9 @@ $dbConn = getConnection();
 //INSERT QUERY
 $event_query = "INSERT INTO ncl_events (eventTitle, eventDescription, eventDate, eventTime, eventDuration, facilityID, eventBookingLimit)
 VALUES ('$title','$description','$date','$time','$duration', '$facility', '$limit')";
-//Find events on day to check no clash
+
+
+//Find events on day for proposed location to check no clash
 $getSimilarEvents = "SELECT eventID, eventDate, eventTime, eventDuration
 FROM ncl_events
 WHERE eventDate = '$date' AND facilityID = '$facility'";
@@ -28,16 +30,21 @@ WHERE eventDate = '$date' AND facilityID = '$facility'";
 //check for time range
 $clash = false;
 $similarEvents = $dbConn->query($getSimilarEvents);
+//for each similar event
 while ($event = $similarEvents->fetchObject()){
+//get time and duration
 $eventStartTime = $event->eventTime;
 $eventDuration = $event->eventDuration;
-
+//calculate end time
 $secs = strtotime($eventDuration)-strtotime("00:01:00");
 $eventEndTime = date("H:i:s",strtotime($eventStartTime)+$secs);
-//check status
+//check $time (the proposed time of new event)
+//is not within the start and end time of a current event
 if($time>=$eventStartTime&&$time<=$eventEndTime){
   $clash = true;
 }
+//check $endTime (the proposed end time of new event)
+//is not within the start and end time of a current event
 if($endTime>=$eventStartTime&&$endTime<=$eventEndTime){
   $clash = true;
 }
