@@ -3,6 +3,7 @@ include 'functions.php';
 setSessionPath();
 startHTML('Sign Up Now','Sign up to booking system');
 makeNav();
+makeTitle('Update User Membership');
 //GET VARIABLES FROM FORM AND SANITISE USING FUNCTION IN CUSTOM SCRIPT
 $userID = sanitise_input('userID');
 $acctype = sanitise_input('acctype');

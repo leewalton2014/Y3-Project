@@ -3,6 +3,7 @@ include 'functions.php';
 setSessionPath();
 startHTML('New Class','Add class to timetable');
 makeNav();
+makeTitle('Add new event');
 //query for facility type selection
 $dbConn = getConnection();
 $sqlFacility = "SELECT facilityID, description, capacity
@@ -13,7 +14,6 @@ $queryResult = $dbConn->query($sqlFacility);
 
 //Signup form
 echo "<div class='mainBody'>
-  <h1>New Class Info</h1>
   <p>Provide information for class.</p>
   <form action='newevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
     <div class='col-1-width'>

@@ -3,7 +3,7 @@ include 'functions.php';
 setSessionPath();
 startHTML('Users','Update user info');
 makeNav();
-makeTitle('Update User Type and Membership');
+makeTitle('Update User Membership');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
 

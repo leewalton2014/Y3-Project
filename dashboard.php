@@ -14,17 +14,18 @@ if ($usertype >= 3){
 }else{
   echo "<h1>User Dashboard</h1>";
 }
-echo "<p>YOU SUCCESSFULLY LOGGED IN</p>";
-echo "<p>Welcome $username</p>
-<a href='newevent-form.php' class='big-button'>New Event</a><br>
-<a href='manage-events.php' class='big-button'>Manage Events</a><br>
-<a href='view-users.php' class='big-button'>View Users</a><br>
-<a href='manage-cms.php' class='big-button'>Manage Content</a><br>
-
-<a href='viewuser-bookings.php' class='big-button'>Your Bookings</a><br>
-<a href='update-userinfo.php?userID=$userid' class='big-button'>Update Account Info</a><br>
-<a href='update-password-form.php' class='big-button'>Change Password</a><br>";
-
+echo "<div class='sidenav'>";
+echo "<ul>
+  <li><a href='dashboard.php' class='emph'>Welcome $username</a></li>
+  <li><a href='newevent-form.php'>New Event</a></li>
+  <li><a href='manage-events.php'>Manage Events</a></li>
+  <li><a href='view-users.php'>View Users</a></li>
+  <li><a href='manage-cms.php'>Manage Content</a></li>
+  <li><a href='viewuser-bookings.php'>Your Bookings</a></li>
+  <li><a href='update-userinfo.php?userID=$userid'>Update Account Info</a></li>
+  <li><a href='update-password-form.php'>Change Password</a></li>
+</ul>";
+echo "</div>";
 
 }else{
 header('Location: login-form.php');

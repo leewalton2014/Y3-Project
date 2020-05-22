@@ -3,6 +3,7 @@ include 'functions.php';
 setSessionPath();
 startHTML('Sign Up Now','Sign up to booking system');
 makeNav();
+makeTitle('Signup Form');
 //Signup form
 echo "<div class='mainBody'>
   <h1>Sign Up</h1>
@@ -29,8 +30,8 @@ echo "<div class='mainBody'>
     <select id='gender' name='gender'>
     <option value='Male'>Male</option>
     <option value='Female'>Female</option>
+    <option value='Other'>Other</option>
     </select>
-    <input type='hidden' name='userType' value='2'/>
     <label for='addr1' class='signup-label'>Address Line 1</label>
     <input placeholder='Address Line 1' type='text' name='addr1'/>
     <label for='addr2' class='signup-label'>Address Line 2</label>
