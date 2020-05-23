@@ -11,7 +11,7 @@ if(empty($username)||empty($password)){
   echo "<p>Please enter a username and password!</p>";
 }else{
 //get hash to check password
-$checkQuery = "SELECT userID, userType, passwordHash
+$checkQuery = "SELECT userID, userType, passwordHash, membershipEXP
 FROM ncl_users WHERE username = :username";
 
 $dbConn = getConnection();
@@ -25,6 +25,7 @@ if($user){
         $_SESSION['user'] = true;
         $_SESSION['userID'] = $user->userID;
         $_SESSION['userType'] = $user->userType;
+        $_SESSION['membershipEXP'] = $user->membershipEXP;
         $_SESSION['userName'] = $username;
         //Redirect to original page
         header('Location: dashboard.php');

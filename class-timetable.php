@@ -12,7 +12,7 @@ if (isset($_REQUEST['weekStart'])){
 }
 
 $weekdays = 7;
-echo "<div class='timetable'>";
+echo "<div class='timetable' id='accordion'>";
 while ($weekdays > 0){
   //get todays events
   $getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit
@@ -21,11 +21,17 @@ while ($weekdays > 0){
   ORDER BY eventTime asc";
   $dbConn = getConnection();
   $queryResult = $dbConn->query($getEventQuery);
-  if ($queryResult == NULL){
+  if ($queryResult->rowCount() == 0){
     //if no events today display blank col
     echo "<div class='timetable-column'>";
     echo "<div class='timetable-heading'>";
-    echo "<h2>$currentDate</h2>";
+    $dayOfWeek = date("l", strtotime($currentDate));
+    echo "<h2>$dayOfWeek</h2>";
+    $ukDate = date("d/m/Y", strtotime($currentDate));
+    echo "<h3>$ukDate</h3>";
+    echo "</div>";
+    echo "<div class='timetable-event'>";
+    echo "<p>No Events</p>";
     echo "</div>";
     echo "</div>";
   }else{
@@ -34,7 +40,8 @@ while ($weekdays > 0){
     echo "<div class='timetable-heading'>";
     $dayOfWeek = date("l", strtotime($currentDate));
     echo "<h2>$dayOfWeek</h2>";
-    echo "<h3>$currentDate</h3>";
+    $ukDate = date("d/m/Y", strtotime($currentDate));
+    echo "<h3>$ukDate</h3>";
     echo "</div>";
     //display events in col
     while ($rowObj = $queryResult->fetchObject()){
@@ -42,7 +49,6 @@ while ($weekdays > 0){
         $startTime = $rowObj->eventTime;
         $duration = $rowObj->eventDuration;
         $endTime = $startTime + $duration;
-
         //display events
         echo "<div class='timetable-event'>";
         echo "<h3>{$rowObj->eventTitle}</h3>";

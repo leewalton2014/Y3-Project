@@ -8,24 +8,19 @@ echo "<div class='mainBody'>";
 if (isset($_SESSION['user']) && $_SESSION['user']){//Session active
 $username = $_SESSION['userName'];
 $usertype = $_SESSION['userType'];
+$membershipEXP = $_SESSION['membershipEXP'];
 $userid = $_SESSION['userID'];
-if ($usertype >= 3){
-  echo "<h1>Admin Dashboard</h1>";
-}else{
-  echo "<h1>User Dashboard</h1>";
+$today = date("Y/m/d");
+
+if ($usertype == 4){
+  include 'dash-admin.php';
+}else if ($usertype == 3){
+  include 'dash-staff.php';
+}else if ($usertype == 2 && $today<=$membershipEXP){
+  include 'dash-member.php';
+}else {
+  include 'dash-user.php';
 }
-echo "<div class='sidenav'>";
-echo "<ul>
-  <li><a href='dashboard.php' class='emph'>Welcome $username</a></li>
-  <li><a href='newevent-form.php'>New Event</a></li>
-  <li><a href='manage-events.php'>Manage Events</a></li>
-  <li><a href='view-users.php'>View Users</a></li>
-  <li><a href='manage-cms.php'>Manage Content</a></li>
-  <li><a href='viewuser-bookings.php'>Your Bookings</a></li>
-  <li><a href='update-userinfo.php?userID=$userid'>Update Account Info</a></li>
-  <li><a href='update-password-form.php'>Change Password</a></li>
-</ul>";
-echo "</div>";
 
 }else{
 header('Location: login-form.php');
