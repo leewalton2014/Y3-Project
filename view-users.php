@@ -3,9 +3,9 @@ include 'functions.php';
 setSessionPath();
 startHTML('Users','Update user info');
 makeNav();
+makeTitle('Users');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Users</h1>";
 $getUsersQuery = "SELECT userID, forename, surname, username, role
 FROM ncl_users INNER JOIN ncl_account_type ON ncl_users.userType = ncl_account_type.accountTypeID
 ORDER BY surname asc";

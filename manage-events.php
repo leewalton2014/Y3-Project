@@ -3,9 +3,9 @@ include 'functions.php';
 setSessionPath();
 startHTML('Events','Update event info');
 makeNav();
+makeTitle('Manage Events');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Manage Events</h1>";
 $currentDate = date("yy/m/d");
 $getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit
 FROM ncl_events INNER JOIN ncl_facilities ON ncl_events.facilityID = ncl_facilities.facilityID

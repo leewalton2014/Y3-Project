@@ -9,11 +9,6 @@ body{
     width: 100%;
     display: inline-block;
 }
-
-
-
-
-
 /*Home Page*/
 
 /*Dashboard*/
@@ -112,6 +107,9 @@ body{
 .card-info {
   padding: 2px 16px;
 }
+.cke_top {
+  width: 100% !important;
+}
 
 /*Nav*/
 nav{
@@ -136,6 +134,7 @@ nav a{
     text-align: center;
     font-size: 16px;
     margin: auto;
+    height: 50px;
 }
 nav a.home {
     background-color: #FFFFFF;
@@ -153,12 +152,10 @@ nav a.logo:hover{
     background-color: #000000;
 }
 nav a.logo{
-    width: 10%;
-    height: auto;
+    width: auto;
 }
 nav a.logo img{
-    width: 100%;
-    height: auto;
+    height: 100%;
 }
 /*Title*/
 .title {
@@ -199,12 +196,17 @@ footer{
   width: 50%;
   height: auto;
   float: left;
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .col-1-width {
   width: 100%;
   height: auto;
   float: left;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .width100{
   width: 100%;
@@ -256,6 +258,10 @@ input[type=submit] {
   width: 50%;
   float: left;
 }
+.cms-label {
+  width: 50%;
+  float: left;
+}
 /*Event Form*/
 #newevent-form input {
   width: 50%;
@@ -265,7 +271,7 @@ input[type=submit] {
   width: 50%;
   float: left;
 }
-/*Events Table*/
+/*100% table basic*/
 #table-basic{
   border-collapse: collapse;
   width: 100%;
@@ -371,6 +377,7 @@ input[type=submit] {
   .footer_pane {
     width: 100%;
   }
+  /*Mobile Nav Top*/
 
 }
 @media only screen and (max-width: 500px) {

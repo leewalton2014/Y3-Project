@@ -19,11 +19,11 @@ echo "<div class='mainBody'>
   <a href='manage-cms.php' class='big-button'>Content List</a><br>
   <form action='cms-update-process.php' method='POST' enctype='multipart/form-data' id='cms-compose'>
     <div class='col-2-width'>
-    <label for='title' class='cms'>Title </label>
+    <label for='title' class='cms-label'>Title </label>
     <input value='{$post->contentTitle}' type='text' name='title' id='title'/>
     </div>
     <div class='col-2-width'>
-    <label for='tag' class='cms'>Tag </label>
+    <label for='tag' class='cms-label'>Tag </label>
     <select id='tag' name='tag'>";
 
 while ($tag = $tags->fetchObject()){

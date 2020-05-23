@@ -85,8 +85,11 @@ if (empty($errors)){
       <label for='dob' class='signup-label'>Date Of Birth</label>
       <input type='date' name='dob' value='$dob'/>
       <label for='gender' class='signup-label'>Gender</label>
-      <select id='gender' name='gender'>
-      <option value='Male'>Male</option>
+      <select id='gender' name='gender'>";
+      if (!empty($gender)){
+        echo "<option value='$gender' selected='selected'>$gender</option>";
+      }
+      echo "<option value='Male'>Male</option>
       <option value='Female'>Female</option>
       <option value='Other'>Other</option>
       </select>

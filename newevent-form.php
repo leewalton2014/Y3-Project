@@ -10,11 +10,10 @@ $sqlFacility = "SELECT facilityID, description, capacity
 FROM ncl_facilities";
 $queryResult = $dbConn->query($sqlFacility);
 
-
-
 //Signup form
-echo "<div class='mainBody'>
-  <p>Provide information for class.</p>
+echo "<div class='mainBody'>";
+echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
+echo "<p>Provide information for class.</p>
   <form action='newevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
     <div class='col-1-width'>
     <label for='title' class='event-label'>Title</label>

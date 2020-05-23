@@ -3,11 +3,12 @@ include 'functions.php';
 setSessionPath();
 startHTML('Users','Update event info');
 makeNav();
+makeTitle('Update Event Info');
 echo "<div class='mainBody'>";
-echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Update Event</h1>";
+echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a>";
+echo "<a href='manage-events.php' class='big-button'>Back to Events</a><br>";
 $eventID = isset($_REQUEST['eventID']) ? $_REQUEST['eventID'] : null;
-$getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit
+$getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit, ncl_facilities.facilityID
 FROM ncl_events INNER JOIN ncl_facilities ON ncl_events.facilityID = ncl_facilities.facilityID
 WHERE eventID = '$eventID'";
 $dbConn = getConnection();
@@ -35,9 +36,14 @@ echo "<label for='facility' class='event-label'>Facility</label>
 $sqlFacility = "SELECT facilityID, description, capacity
 FROM ncl_facilities";
 $facilities = $dbConn->query($sqlFacility);
+$eventFacility = $event->facilityID;
 while ($facility = $facilities->fetchObject()) {
-                 echo "<option value='{$facility->facilityID}'>{$facility->description} ({$facility->capacity})</option>\n";
-             }
+  if ($eventFacility == $facility->facilityID){
+    echo "<option value='{$facility->facilityID}' selected='selected'>{$facility->description} ({$facility->capacity})</option>\n";
+  }else{
+    echo "<option value='{$facility->facilityID}'>{$facility->description} ({$facility->capacity})</option>\n";
+  }
+}
 
 echo "</select>
     <label for='limit' class='event-label'>Max booking capacity</label>

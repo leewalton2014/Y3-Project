@@ -5,8 +5,8 @@ startHTML('Users','Update user info');
 makeNav();
 makeTitle('Update User Membership');
 echo "<div class='mainBody'>";
-echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-
+echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a>";
+echo "<a href='view-users.php' class='big-button'>Back to Users</a><br>";
 
 $userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
 
