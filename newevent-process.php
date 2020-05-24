@@ -116,13 +116,26 @@ if (empty($errors)){
   FROM ncl_facilities";
   $facilities = $dbConn->query($sqlFacility);
 
-  //Signup form
+  //event form
   echo "<p>Provide information for class.</p>
     <form action='newevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
       <div class='col-1-width'>
-      <label for='title' class='event-label'>Title</label>
-      <input placeholder='Title' type='text' name='title' value='$title'/>
-      <label for='description' class='event-label'>Description</label>
+      <label for='title' class='event-label'>Class</label>";
+  $getClasses = "SELECT classID, className
+  FROM ncl_classes";
+  $classes = $dbConn->query($getClasses);
+  echo "<select id='title' name='title'>";
+
+  //Options from db
+  while ($class = $classes->fetchObject()) {
+    if ($title == $class->classID){
+      echo "<option value='{$class->classID}' selected='selected'>{$class->className}</option>\n";
+    }else{
+      echo "<option value='{$class->classID}'>{$class->className}</option>\n";
+    }
+  }
+  echo "</select>";
+  echo "<label for='description' class='event-label'>Description</label>
       <input placeholder='Description' type='text' name='description' value='$description'/>
       <label for='date' class='event-label'>Date</label>
       <input type='date' name='date' value='$date'/>

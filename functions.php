@@ -57,12 +57,14 @@ function makeNav(){
       <li><a href='class-list.php'>Classes</a></li>
       <li><a href='about-us.php'>About Us</a></li>
       <li><a href='cms.php'>Content</a></li>
-      <li><a href='dashboard.php'>Dashboard</a></li>
 makeNAV;
   $content .= "\n";
   //Logout button float right
   if (isset($_SESSION['user']) && $_SESSION['user']){
+    $content .= "<li><a href='dashboard.php'>Dashboard</a></li>";
     $content .= "<li><a href='logout-process.php'>Logout</a></li>";
+  }else{
+    $content .= "<li><a href='dashboard.php'>Login</a></li>";
   }
   $content .= "</ul>
     </nav>";

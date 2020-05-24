@@ -15,8 +15,9 @@ $weekdays = 7;
 echo "<div class='timetable' id='accordion'>";
 while ($weekdays > 0){
   //get todays events
-  $getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit
+  $getEventQuery = "SELECT eventID, className, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit
   FROM ncl_events INNER JOIN ncl_facilities ON ncl_events.facilityID = ncl_facilities.facilityID
+  INNER JOIN ncl_classes ON ncl_events.eventTitle = ncl_classes.classID
   WHERE eventDate = '$currentDate'
   ORDER BY eventTime asc";
   $dbConn = getConnection();
@@ -51,7 +52,7 @@ while ($weekdays > 0){
         $endTime = $startTime + $duration;
         //display events
         echo "<div class='timetable-event'>";
-        echo "<h3>{$rowObj->eventTitle}</h3>";
+        echo "<h3>{$rowObj->className}</h3>";
         echo "<p>{$rowObj->eventDescription}</p>";
         echo "<p><b>Start:</b> {$rowObj->eventTime}</p>";
         echo "<p><b>Duration:</b> {$rowObj->eventDuration}</p>";

@@ -134,9 +134,22 @@ if (empty($errors)){
   echo "<form action='updateevent-process.php' method='POST' enctype='multipart/form-data' id='newevent-form'>
       <div class='col-1-width'>
       <input type='hidden' value='$eventID' name='eventid'/>
-      <label for='title' class='event-label'>Title</label>
-      <input value='{$event->eventTitle}' type='text' name='title'/>
-      <label for='description' class='event-label'>Description</label>
+      <label for='title' class='event-label'>Class</label>";
+  $getClasses = "SELECT classID, className
+  FROM ncl_classes";
+  $classes = $dbConn->query($getClasses);
+  echo "<select id='title' name='title'>";
+
+  //Options from db
+  while ($class = $classes->fetchObject()) {
+    if ($event->eventTitle == $class->classID){
+      echo "<option value='{$class->classID}' selected='selected'>{$class->className}</option>\n";
+    }else{
+      echo "<option value='{$class->classID}'>{$class->className}</option>\n";
+    }
+  }
+  echo "</select>";
+  echo "<label for='description' class='event-label'>Description</label>
       <input value='{$event->eventDescription}' type='text' name='description'/>
       <label for='date' class='event-label'>Date</label>
       <input type='date' value='{$event->eventDate}' name='date'/>
