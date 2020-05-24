@@ -5,6 +5,7 @@ startHTML('User Dashboard','Access your user account');
 makeNav();
 makeTitle('Change Password');
 echo "<div class='mainBody'>";
+echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
 if (isset($_SESSION['user']) && $_SESSION['user']){//Session active
 $username = $_SESSION['userName'];
 $usertype = $_SESSION['userType'];

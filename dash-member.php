@@ -17,8 +17,9 @@ if (isset($_SESSION['user']) && $usertype == 2){
   $maxDate = strtotime($today);
   $maxDate = strtotime("+7 day", $maxDate);
   $maxDate = date("Y/m/d", $maxDate);
-  $getBookingsQuery = "SELECT bookingID, eventDate, eventTime, eventTitle, eventDescription, eventDuration
+  $getBookingsQuery = "SELECT bookingID, eventDate, className, eventTime, eventTitle, eventDescription, eventDuration
   FROM ncl_bookings INNER JOIN ncl_events ON ncl_bookings.eventID = ncl_events.eventID
+  INNER JOIN ncl_classes ON ncl_events.eventTitle = ncl_classes.classID
   WHERE userID = '$userID' AND eventDate >= '$today' AND eventDate <= '$maxDate'
   ORDER BY eventDate, eventTime asc";
   $dbConn = getConnection();
@@ -44,7 +45,7 @@ if (isset($_SESSION['user']) && $usertype == 2){
       $ukDate = date("d/m/Y", strtotime($eventDate));
       echo "<td>$ukDate</td>";
       echo "<td>{$rowObj->eventTime}</td>";
-      echo "<td>{$rowObj->eventTitle}</td>";
+      echo "<td>{$rowObj->className}</td>";
       echo "<td>{$rowObj->eventDescription}</td>";
       echo "<td>{$rowObj->eventDuration}</td>";
       echo "</tr>";

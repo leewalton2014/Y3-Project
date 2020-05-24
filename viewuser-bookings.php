@@ -3,12 +3,14 @@ include 'functions.php';
 setSessionPath();
 startHTML('Bookings','Users bookings');
 makeNav();
+makeTitle('Bookings');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
 echo "<h1>Your Bookings</h1>";
 $userID = $_SESSION['userID'];
-$getBookingsQuery = "SELECT bookingID, eventDate, eventTime, eventTitle, eventDescription, eventDuration
+$getBookingsQuery = "SELECT bookingID, eventDate, eventTime, eventTitle, className, eventDescription, eventDuration
 FROM ncl_bookings INNER JOIN ncl_events ON ncl_bookings.eventID = ncl_events.eventID
+INNER JOIN ncl_classes ON ncl_events.eventTitle = ncl_classes.classID
 WHERE userID = '$userID'
 ORDER BY eventDate, eventTime asc";
 $dbConn = getConnection();
@@ -28,7 +30,7 @@ while ($rowObj = $queryResult->fetchObject()){
     echo "<tr>";
     echo "<td>{$rowObj->eventDate}</td>";
     echo "<td>{$rowObj->eventTime}</td>";
-    echo "<td>{$rowObj->eventTitle}</td>";
+    echo "<td>{$rowObj->className}</td>";
     echo "<td>{$rowObj->eventDescription}</td>";
     echo "<td>{$rowObj->eventDuration}</td>";
     echo "<td><a href='cancel-booking.php?bookingID={$rowObj->bookingID}'>Cancel</a></td>";
