@@ -19,6 +19,10 @@ if (isset($_SESSION['user']) && $usertype == 4){
   echo "<div class='dash-main-infobox'>
   <p>Please logout of the system when not in use for data protection.</p>
   </div>";
+  echo "<h2>Class Demand</h2>";
+  echo "<div class='chartContainer'>
+        <canvas id='graphCanvas'></canvas>
+    </div>";
 
   echo "</div>";
 }else{
@@ -26,3 +30,43 @@ if (isset($_SESSION['user']) && $usertype == 4){
 }
 
 ?>
+<script>
+  $(document).ready(function (){
+    showGraph();
+  });
+
+  function showGraph(){
+    {
+      $.post("getClassData.php",
+      function (data){
+        console.log(data);
+        var classNames = [];
+        var count = [];
+
+        for (var i in data) {
+          classNames.push(data[i].className);
+          count.push(data[i].count);
+        }
+        var chartdata = {
+          labels: classNames,
+          datasets: [
+            {
+              label: 'Class Data',
+              backgroundColor: '#49e2ff',
+              borderColor: '#46d5f1',
+              hoverBackgroundColor: '#CCCCCC',
+              hoverBorderColor: '#666666',
+              data: count
+            }
+          ]
+        };
+        var graphTarget = $("#graphCanvas");
+        var barGraph = new Chart(graphTarget, {
+            type: 'bar',
+            data: chartdata
+        });
+      });
+    }
+  }
+
+</script>

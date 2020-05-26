@@ -12,6 +12,10 @@ body{
 /*Home Page*/
 
 /*Dashboard*/
+.chartContainer {
+  width: 100%;
+  height: auto;
+}
 .dash-main {
   width: 80%;
   float: left;

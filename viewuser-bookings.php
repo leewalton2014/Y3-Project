@@ -6,12 +6,12 @@ makeNav();
 makeTitle('Bookings');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
-echo "<h1>Your Bookings</h1>";
+$today = date("Y-m-d");
 $userID = $_SESSION['userID'];
 $getBookingsQuery = "SELECT bookingID, eventDate, eventTime, eventTitle, className, eventDescription, eventDuration
 FROM ncl_bookings INNER JOIN ncl_events ON ncl_bookings.eventID = ncl_events.eventID
 INNER JOIN ncl_classes ON ncl_events.eventTitle = ncl_classes.classID
-WHERE userID = '$userID'
+WHERE userID = '$userID' AND eventDate >= '$today'
 ORDER BY eventDate, eventTime asc";
 $dbConn = getConnection();
 $queryResult = $dbConn->query($getBookingsQuery);

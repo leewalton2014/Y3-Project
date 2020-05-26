@@ -40,6 +40,7 @@ function startHTML($title, $description){
         <script src='//cdn.ckeditor.com/4.14.0/full/ckeditor.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
         <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
+        <script src='https://cdn.jsdelivr.net/npm/chart.js@2.8.0'></script>
     </head>
     <body>
 startHTML;
