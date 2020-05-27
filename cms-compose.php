@@ -1,9 +1,13 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Compose Post');
+
+
+if (isset($_SESSION['user']) && $_SESSION['userType']>=3){
+
 //Signup form
 $dbConn = getConnection();
 $getTags = "SELECT tagID, tagName
@@ -37,6 +41,12 @@ echo "</select>
     <input class='logInSubmit' type='submit' value='Compose'/><br>
     </form>
 </div>";
+
+
+}else{
+header('Location: login-form.php');
+exit;
+}
 makeFooter();
 endHTML();
 ?>

@@ -6,6 +6,8 @@ makeNav();
 makeTitle('Bookings');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
+
+if (isset($_SESSION['user'])){
 $today = date("Y-m-d");
 $userID = $_SESSION['userID'];
 $getBookingsQuery = "SELECT bookingID, eventDate, eventTime, eventTitle, className, eventDescription, eventDuration
@@ -38,6 +40,14 @@ while ($rowObj = $queryResult->fetchObject()){
 }
 
 echo "</table>";
+
+
+}else{
+  header('Location: login-form.php');
+  exit;
+}
+
+
 echo "</div>";
 makeFooter();
 endHTML();

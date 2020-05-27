@@ -3,10 +3,10 @@ include 'functions.php';
 setSessionPath();
 startHTML('Process','Cancel booking');
 makeNav();
-makeTitle('Booking');
+makeTitle('Cancel Event');
 echo "<div class='mainBody'>";
 
-$bookingID = isset($_REQUEST['bookingID']) ? $_REQUEST['bookingID'] : null;
+$eventID = isset($_REQUEST['eventID']) ? $_REQUEST['eventID'] : null;
 //session vars
 $userType = $_SESSION['userType'];
 $membershipEXP = $_SESSION['membershipEXP'];
@@ -14,38 +14,35 @@ $userID = $_SESSION['userID'];
 $dbConn = getConnection();
 
 $errors = array();
-if (!isset($_SESSION['user'])){
-  array_push($errors,"ERROR: Please login.");
+if (!isset($_SESSION['user']) || $userType < 3){
+  array_push($errors,"ERROR: You do not have access to do this.");
 }
-if (empty($bookingID)){
+if (empty($eventID)){
   array_push($errors,"ERROR: Please try again.");
 }
 
-//check date of event related to booking
-$getEventInfo = "SELECT eventDate
-FROM ncl_bookings INNER JOIN ncl_events ON ncl_bookings.eventID = ncl_events.eventID
-WHERE bookingID = '$bookingID'";
-$eventInfo = $dbConn->query($getEventInfo);
-$eventData = $eventInfo->fetchObject();
+//check if bookings
+$getBookings = "SELECT eventID
+FROM ncl_bookings
+WHERE eventID = '$eventID'";
+$bookings = $dbConn->query($getBookings);
 
-$eventDate = $eventData->eventDate;
-
-$today = date("Y-m-d");
-if ($today >= $eventDate){
-  array_push($errors,"ERROR: You cannot cancel bookings on the day of the class.");
+if ($bookings->rowCount() > 0){
+  array_push($errors,"ERROR: You cannot cancel events that have bookings.");
 }
+
 
 if (empty($errors)){
   //Delete QUERY
-  $event_query = "DELETE FROM ncl_bookings
-  WHERE bookingID = '$bookingID'";
+  $event_query = "DELETE FROM ncl_events
+  WHERE eventID = '$eventID'";
   //delete query
   $queryResult = $dbConn->query($event_query);
         if ($queryResult === false) {
           echo "<p>Please try again! <a href='viewuser-bookings.php'>Try again.</a></p>\n";
           exit;
         }else{
-          header("Location: viewuser-bookings.php");
+          header("Location: manage-events.php");
           die();
         }
 }else{
@@ -55,7 +52,7 @@ if (empty($errors)){
   foreach ($errors as $error){
     echo "<p>$error</p>";
   }
-  echo "<p>Go to <a href='viewuser-bookings.php'>Bookings.</a></p>\n";
+  echo "<p>Go to <a href='manage-events.php'>Events.</a></p>\n";
   echo "</div>";
   echo "</div>";
 }

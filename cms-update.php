@@ -1,12 +1,15 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Update Post');
 //Signup form
 $dbConn = getConnection();
 $contentID = isset($_REQUEST['contentID']) ? $_REQUEST['contentID'] : null;
+
+if (isset($_SESSION['user']) && $_SESSION['userType']>=3){
+
 $getPostInfo = "SELECT contentTitle, contentBody, contentTag
 FROM ncl_cms_content
 WHERE contentID = '$contentID'";
@@ -23,8 +26,8 @@ echo "<div class='mainBody'>
     <input value='{$post->contentTitle}' type='text' name='title' id='title'/>
     </div>
     <div class='col-2-width'>
-    <label for='tag' class='cms-label'>Tag </label>
-    <select id='tag' name='tag'>";
+    <label for='tag' class='cms-label'>Tag </label>";
+  echo "<select id='tag' name='tag'>";
 
 while ($tag = $tags->fetchObject()){
     if ($post->contentTag == $tag->tagID){
@@ -47,6 +50,12 @@ echo "</select>
     <input class='logInSubmit' type='submit' value='Update'/><br>
     </form>
 </div>";
+
+}else{
+header('Location: login-form.php');
+exit;
+}
+
 makeFooter();
 endHTML();
 ?>

@@ -1,7 +1,7 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Update User Membership');
 echo "<div class='mainBody'>";
@@ -14,14 +14,18 @@ $acctype = sanitise_input('acctype');
 $expdate = sanitise_input('expdate');
 $dbConn = getConnection();
 
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
 
 $errors = array();
+//check required values
 if(empty($acctype)||empty($userID)){
   array_push($errors,"ERROR: Please select an account type.");
 }
+//prevents null membership date when member role is being granted
 if($acctype == 2 && empty($expdate)){
   array_push($errors,"ERROR: Please enter a membership experation date.");
 }
+//date checks
 if (!empty($expdate)){
   list($y, $m, $d) = explode("-", $expdate);
   if(!checkdate($m, $d, $y)){
@@ -33,23 +37,34 @@ if (!empty($expdate)){
     array_push($errors,"ERROR: Membership expiration date must be in the future.");
   }
 }
-
-
+//prevents non staff users upgrading account types
+if ($_SESSION['userType'] < 3){
+  array_push($errors,"ERROR: You do not have permissions to make these changes.");
+}
+//prevents staff from updating user roles to staff or admin (only admins have permission)
+if ($_SESSION['userType'] < 4 && $acctype > 2){
+  array_push($errors,"ERROR: You do not have permissions to make these changes.");
+}
 
 
 if (empty($errors)){
   //INSERT QUERY
   $updateQuery = "UPDATE ncl_users SET
-  userType = '$acctype',
-  membershipEXP = '$expdate'
-  WHERE userID = '$userID'";
+  userType = :userType,
+  membershipEXP = :membershipEXP
+  WHERE userID = :userID";
 
-  $queryResult = $dbConn->query($updateQuery);
+  $queryResult = $dbConn->prepare($updateQuery);
+  $queryResult->execute(array(':userType' => $acctype,
+  ':membershipEXP' => $expdate,
+  ':userID' => $userID
+  ));
+
         if ($queryResult === false) {
           echo "<p>Please try again! <a href='update-usertype.php'>Try again.</a></p>\n";
           exit;
         }else{
-          header("Location: dashboard.php");
+          header("Location: view-users.php");
           die();
         }
 }else{
@@ -92,6 +107,11 @@ if (empty($errors)){
   </form>";
 }
 
+
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 echo "</div>";
 makeFooter();
 endHTML();

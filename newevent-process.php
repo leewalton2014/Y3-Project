@@ -1,7 +1,7 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('New Event Info');
 echo "<div class='mainBody'>";
@@ -18,6 +18,8 @@ $limit = sanitise_input('limit');
 $diff = strtotime($duration)-strtotime("00:01:00");
 $endTime = date("H:i:s",strtotime($time)+$diff);
 $dbConn = getConnection();
+
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
 
 $errors = array();
 
@@ -93,9 +95,17 @@ if (empty($errors)){
 if (empty($errors)){
   //INSERT QUERY
   $event_query = "INSERT INTO ncl_events (eventTitle, eventDescription, eventDate, eventTime, eventDuration, facilityID, eventBookingLimit)
-  VALUES ('$title','$description','$date','$time','$duration', '$facility', '$limit')";
+  VALUES (:eventTitle, :eventDescription, :eventDate, :eventTime, :eventDuration, :facilityID, :eventBookingLimit)";
 
-    $queryResult = $dbConn->query($event_query);
+    $queryResult = $dbConn->prepare($event_query);
+    $queryResult->execute(array(':eventTitle' => $title,
+    ':eventDescription' => $description,
+    ':eventDate' => $date,
+    ':eventTime' => $time,
+    ':eventDuration' => $duration,
+    ':facilityID' => $facility,
+    ':eventBookingLimit' => $limit
+    ));
           if ($queryResult === false) {
             echo "<p>Please try again! <a href='newevent-form.php'>Try again.</a></p>\n";
             exit;
@@ -164,6 +174,10 @@ if (empty($errors)){
       </form>";
 }
 
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 
 echo "</div>";
 makeFooter();

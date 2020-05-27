@@ -10,6 +10,7 @@ echo "<a href='view-users.php' class='big-button'>Back to Users</a><br>";
 
 $userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
 
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
 
 $getUsersQuery = "SELECT userID, forename, surname, username, userType, email, dob, membershipEXP, postcode, addrL2, addrL1
 FROM ncl_users INNER JOIN ncl_account_type ON ncl_users.userType = ncl_account_type.accountTypeID
@@ -30,9 +31,18 @@ echo "<form action='updateroles-process.php' method='POST' enctype='multipart/fo
 <select id='acctype' name='acctype'>";
 while ($userType = $userTypes->fetchObject()){
   if ($user->userType == $userType->accountTypeID){
-    echo "<option value='{$userType->accountTypeID}' selected='selected'>{$userType->role}</option>";
+    if ($_SESSION['userType'] < 4 && $userType->accountTypeID >= 3){
+      echo "<option value='{$userType->accountTypeID}' selected='selected' disabled>{$userType->role}</option>";
+    }else{
+      echo "<option value='{$userType->accountTypeID}' selected='selected'>{$userType->role}</option>";
+    }
+
   }else{
-    echo "<option value='{$userType->accountTypeID}'>{$userType->role}</option>";
+    if ($_SESSION['userType'] < 4 && $userType->accountTypeID >= 3){
+      echo "<option value='{$userType->accountTypeID}' disabled>{$userType->role}</option>";
+    }else{
+      echo "<option value='{$userType->accountTypeID}'>{$userType->role}</option>";
+    }
   }
 }
 
@@ -45,7 +55,9 @@ echo "</select>
 </form>";
 
 
-
+}else{//no access to page
+  header('Location: login-form.php');
+}
 
 echo "</div>";
 makeFooter();

@@ -5,13 +5,31 @@ startHTML('Newcastle Sport Home','The home of newcastles newest sport venue');
 makeNav();
 //Main Body
 echo "<div class='mainBody'>
-<img class='width100'src='assets/img/boxing.jpg'>
-<h1>Newcastle Sport</h1>
-<p>Welcome to Newcastle Sport the city centres new multi-million pound facility, with a range of
-classes and facilities for every one of any age and ability to enjoy. There is something for you
-at Newcastle Sport, so why not give us a visit.</p>
-<p>More info here.</p>
-<a href='signup-form.php' class='big-button'>Sign Up Today!</a><br>
+<img class='width100'src='assets/img/boxing.jpg'>";
+$tagID = "1";
+$dbConn = getConnection();
+$getCMSContent = "SELECT contentID, username, postDate, postTime, version, contentTitle, contentBody, contentTag, tagName
+FROM ncl_cms_content INNER JOIN ncl_cms_tags ON ncl_cms_content.contentTag = ncl_cms_tags.tagID
+INNER JOIN ncl_users ON ncl_cms_content.publisher = ncl_users.userID
+WHERE contentTag = '$tagID'
+ORDER BY postDate desc, postTime desc";
+
+$CMSContent = $dbConn->query($getCMSContent);
+while($content = $CMSContent->fetchObject()){
+//post
+echo "<div class='cms-post'>";
+$post = $content->contentBody;
+echo htmlspecialchars_decode((stripslashes($post)));
+echo "</div>";
+//post-info
+echo "<div class='cms-post'>";
+echo "<p><b>Last Updated: </b>{$content->postDate} {$content->postTime}</p>";
+echo "</div>";
+}
+
+
+
+echo "<a href='signup-form.php' class='big-button'>Sign Up Today!</a><br>
 </div>";
 makeFooter();
 endHTML();

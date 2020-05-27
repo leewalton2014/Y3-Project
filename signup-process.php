@@ -42,14 +42,35 @@ if (!in_array($gender, $genders)){
   array_push($errors,"ERROR: Please select a gender from the list.");
 }
 
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  array_push($errors,"ERROR: Invalid Email.");
+}
+
+if (strlen($postcode) > 10) {
+  array_push($errors,"ERROR: Invalid Postcode.");
+}
+
 
 if (empty($errors)){
   //HASH PASSWORD
   $passwordHash = password_hash($password, PASSWORD_DEFAULT);
   //INSERT QUERY
   $signup_query = "INSERT INTO ncl_users (forename, surname, username, email, passwordHash, dob, gender, userType, addrL1, addrL2, postcode)
-  VALUES ('$forename','$surname','$username','$email','$passwordHash', '$dob', '$gender', '$userType', '$addr1', '$addr2', '$postcode')";
-  $queryResult = $dbConn->query($signup_query);
+  VALUES (:forename, :surname, :username, :email, :passwordHash, :dob, :gender, :userType, :addrL1, :addrL2, :postcode)";
+
+  $queryResult = $dbConn->prepare($signup_query);
+  $queryResult->execute(array(':forename' => $forename,
+  ':surname' => $surname,
+  ':username' => $username,
+  ':email' => $email,
+  ':passwordHash' => $passwordHash,
+  ':dob' => $dob,
+  ':gender' => $gender,
+  ':userType' => $userType,
+  ':addrL1' => $addr1,
+  ':addrL2' => $addr2,
+  ':postcode' => $postcode
+  ));
         if ($queryResult === false) {
           echo "<p>Please try again! <a href='signup-form.php'>Try again.</a></p>\n";
           exit;

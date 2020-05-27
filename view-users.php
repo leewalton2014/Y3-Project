@@ -12,6 +12,8 @@ ORDER BY surname asc";
 $dbConn = getConnection();
 $queryResult = $dbConn->query($getUsersQuery);
 
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
+
 echo "<table id='table-basic'>
 <tr>
 <th>Forename</th>
@@ -32,8 +34,12 @@ while ($rowObj = $queryResult->fetchObject()){
     echo "<td><a href='update-userinfo.php?userID={$rowObj->userID}'>Update Info</a></td>";
     echo "</tr>";
 }
-
 echo "</table>";
+
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 echo "</div>";
 makeFooter();
 endHTML();

@@ -1,7 +1,7 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Login');
 echo "<div class='mainBody'>";

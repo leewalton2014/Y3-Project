@@ -6,11 +6,19 @@ makeNav();
 makeTitle('Update User Info');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a>";
+
+$userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
+
+if (isset($_SESSION['user'])){
+
+if ($_SESSION['userType'] >= 3||$_SESSION['userID'] == $userID){
+//acces to form
 $usertype = $_SESSION['userType'];
+
 if ($usertype >= 3){
 echo "<a href='view-users.php' class='big-button'>Back to Users</a>";
 }
-$userID = isset($_REQUEST['userID']) ? $_REQUEST['userID'] : null;
+
 $getUsersQuery = "SELECT userID, forename, surname, username, role, email, gender, dob, membershipEXP, postcode, addrL2, addrL1
 FROM ncl_users INNER JOIN ncl_account_type ON ncl_users.userType = ncl_account_type.accountTypeID
 WHERE userID = '$userID'";
@@ -50,6 +58,15 @@ echo "<form action='update-userprocess.php' method='POST' enctype='multipart/for
 <input class='updateUser' value='Update' type='submit'/>
 </form>";
 
+
+//not admin or not user with access
+}else{
+  header('Location: login-form.php');
+}
+
+}else{
+  header('Location: login-form.php');
+}
 
 echo "</div>";
 makeFooter();

@@ -10,6 +10,7 @@ $sqlFacility = "SELECT facilityID, description, capacity
 FROM ncl_facilities";
 $queryResult = $dbConn->query($sqlFacility);
 
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
 //Signup form
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a><br>";
@@ -51,6 +52,11 @@ echo "</select>
     <input class='addEventSubmit' type='submit'/><br>
     </div>
 </div>";
+
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 makeFooter();
 endHTML();
 ?>

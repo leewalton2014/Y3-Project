@@ -24,6 +24,7 @@ if ($usertype == 4){
 
 }else{
 header('Location: login-form.php');
+exit;
 }
 
 echo "</div>";

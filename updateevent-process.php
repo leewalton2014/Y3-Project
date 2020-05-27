@@ -1,7 +1,7 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Update Event Info');
 echo "<div class='mainBody'>";
@@ -17,6 +17,8 @@ $duration = sanitise_input('duration');
 $facility = sanitise_input('facility');
 $limit = sanitise_input('limit');
 
+
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
 //proposed end time
 $diff = strtotime($duration)-strtotime("00:01:00");
 $endTime = date("H:i:s",strtotime($time)+$diff);
@@ -100,16 +102,26 @@ if (empty($errors)){
 if (empty($errors)){
   //UPDATE QUERY
   $event_query = "UPDATE ncl_events SET
-  eventTitle = '$title',
-  eventDescription = '$description',
-  eventDate = '$date',
-  eventTime = '$time',
-  eventDuration = '$duration',
-  facilityID = '$facility',
-  eventBookingLimit = '$limit'
-  WHERE eventID = '$eventID'";
+  eventTitle = :eventTitle,
+  eventDescription = :eventDescription,
+  eventDate = :eventDate,
+  eventTime = :eventTime,
+  eventDuration = :eventDuration,
+  facilityID = :facilityID,
+  eventBookingLimit = :eventBookingLimit
+  WHERE eventID = :eventID";
 
-  $queryResult = $dbConn->query($event_query);
+  $queryResult = $dbConn->prepare($event_query);
+  $queryResult->execute(array(':eventTitle' => $title,
+  ':eventDescription' => $description,
+  ':eventDate' => $date,
+  ':eventTime' => $time,
+  ':eventDuration' => $duration,
+  ':facilityID' => $facility,
+  ':eventBookingLimit' => $limit,
+  ':eventID' => $eventID
+  ));
+
         if ($queryResult === false) {
           echo "<p>Please try again! <a href='updateevent-form.php'>Try again.</a></p>\n";
           exit;
@@ -183,6 +195,11 @@ if (empty($errors)){
   </form>";
 }
 
+
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 makeFooter();
 endHTML();
 ?>

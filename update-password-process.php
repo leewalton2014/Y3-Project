@@ -1,10 +1,14 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Change Password');
 echo "<div class='mainBody'>";
+
+if (isset($_SESSION['user']) && $_SESSION['user']){//Session active
+
+
 //GET VARIABLES FROM FORM AND SANITISE USING FUNCTION IN CUSTOM SCRIPT
 $userID = $_SESSION['userID'];
 $oldpass = sanitise_input('oldpass');
@@ -41,9 +45,14 @@ if ($oldpass == $newpass1){
 if (empty($errors)){
   //UPDATE QUERY
   $updateQuery = "UPDATE ncl_users SET
-  passwordHash = '$password'
-  WHERE userID = '$userID'";
-  $queryResult = $dbConn->query($updateQuery);
+  passwordHash = :passwordHash
+  WHERE userID = :userID";
+
+  $queryResult = $dbConn->prepare($updateQuery);
+  $queryResult->execute(array(':passwordHash' => $password,
+  ':userID' => $userID
+  ));
+
   if ($queryResult === false) {
       echo "<p>Please try again! <a href='updateevent-form.php'>Try again.</a></p>\n";
       exit;
@@ -69,7 +78,10 @@ if (empty($errors)){
   </form>";
 }
 
-
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 
 
 

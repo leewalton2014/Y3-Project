@@ -1,17 +1,25 @@
 <?php
 include 'functions.php';
 setSessionPath();
-startHTML('Sign Up Now','Sign up to booking system');
+startHTML('Newcastle Sport','Booking System');
 makeNav();
 makeTitle('Update User Info');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a>";
+
+$userID = sanitise_input('userID');
+
+if (isset($_SESSION['user'])){
+
+if ($_SESSION['userType'] >= 3||$_SESSION['userID'] == $userID){
+
+
 $usertype = $_SESSION['userType'];
 if ($usertype >= 3){
 echo "<a href='view-users.php' class='big-button'>Back to Users</a>";
 }
 //GET VARIABLES FROM FORM AND SANITISE USING FUNCTION IN CUSTOM SCRIPT
-$userID = sanitise_input('userID');
+
 $forename = sanitise_input('forename');
 $surname = sanitise_input('surname');
 $email = sanitise_input('email');
@@ -48,23 +56,42 @@ if (!in_array($gender, $genders)){
   array_push($errors,"ERROR: Please select a gender from the list.");
 }
 
+if ($_SESSION['userID'] !== $userID){
+  if ($_SESSION['userType'] < 3){
+    array_push($errors,"ERROR: You do not have permissions to make these changes.");
+  }
+}
+
+
 
 if (empty($errors)){
   //Update db reccord
   //UPDATE QUERY
   $updateQuery = "UPDATE ncl_users SET
-  username = '$username',
-  forename = '$forename',
-  surname = '$surname',
-  dob = '$dob',
-  email = '$email',
-  gender = '$gender',
-  addrL1 = '$addr1',
-  addrL2 = '$addr2',
-  postcode = '$postcode'
-  WHERE userID = '$userID'";
+  username = :username,
+  forename = :forename,
+  surname = :surname,
+  dob = :dob,
+  email = :email,
+  gender = :gender,
+  addrL1 = :addrL1,
+  addrL2 = :addrL2,
+  postcode = :postcode
+  WHERE userID = :userID";
 
-  $queryResult = $dbConn->query($updateQuery);
+  $queryResult = $dbConn->prepare($updateQuery);
+  $queryResult->execute(array(':username' => $username,
+  ':forename' => $forename,
+  ':surname' => $surname,
+  ':dob' => $dob,
+  ':email' => $email,
+  ':gender' => $gender,
+  ':addrL1' => $addr1,
+  ':addrL2' => $addr2,
+  ':postcode' => $postcode,
+  ':userID' => $userID
+  ));
+
         if ($queryResult === false) {
           echo "<p>Please try again! <a href='updateevent-form.php'>Try again.</a></p>\n";
           exit;
@@ -120,7 +147,13 @@ if (empty($errors)){
 }
 
 
+}else{
+  header('Location: login-form.php');
+}
 
+}else{
+  header('Location: login-form.php');
+}
 
 echo "</div>";
 makeFooter();

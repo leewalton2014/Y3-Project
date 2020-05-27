@@ -7,6 +7,9 @@ makeTitle('Update Event Info');
 echo "<div class='mainBody'>";
 echo "<a href='dashboard.php' class='big-button'>Back to dashboard</a>";
 echo "<a href='manage-events.php' class='big-button'>Back to Events</a><br>";
+
+if (isset($_SESSION['user']) && $_SESSION['userType'] >= 3){
+  
 $eventID = isset($_REQUEST['eventID']) ? $_REQUEST['eventID'] : null;
 $getEventQuery = "SELECT eventID, eventTitle, eventDescription, eventDate, eventTime, eventDuration, description, eventBookingLimit, ncl_facilities.facilityID
 FROM ncl_events INNER JOIN ncl_facilities ON ncl_events.facilityID = ncl_facilities.facilityID
@@ -65,7 +68,10 @@ echo "</select>
 </div>
 </form>";
 
-
+}else{
+  header('Location: login-form.php');
+  exit;
+}
 
 echo "</div>";
 makeFooter();

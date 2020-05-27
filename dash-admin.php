@@ -1,4 +1,10 @@
 <?php
+/**
+*implements chart.js library
+*
+*https://phppot.com/php/creating-dynamic-data-graph-using-php-and-chart-js/
+*used as reference for setup of chart.js
+*/
 if (isset($_SESSION['user']) && $usertype == 4){
   //dash content
   echo "<div class='sidenav'>";
@@ -8,6 +14,7 @@ if (isset($_SESSION['user']) && $usertype == 4){
     <li><a href='newevent-form.php'>New Event</a></li>
     <li><a href='manage-events.php'>Manage Events</a></li>
     <li><a href='view-users.php'>View Users</a></li>
+    <li><a href='data-analytics.php'>Data Analytics</a></li>
     <li><a href='manage-cms.php'>Manage Content</a></li>
     <li><a href='viewuser-bookings.php'>Your Bookings</a></li>
     <li><a href='update-userinfo.php?userID=$userid'>Update Account Info</a></li>
@@ -19,7 +26,7 @@ if (isset($_SESSION['user']) && $usertype == 4){
   echo "<div class='dash-main-infobox'>
   <p>Please logout of the system when not in use for data protection.</p>
   </div>";
-  echo "<h2>Class Demand</h2>";
+  echo "<h2>Classes Sceduled</h2>";
   echo "<div class='chartContainer'>
         <canvas id='graphCanvas'></canvas>
     </div>";
@@ -52,9 +59,9 @@ if (isset($_SESSION['user']) && $usertype == 4){
           datasets: [
             {
               label: 'Class Data',
-              backgroundColor: '#49e2ff',
+              backgroundColor: '#FF7171',
               borderColor: '#46d5f1',
-              hoverBackgroundColor: '#CCCCCC',
+              hoverBackgroundColor: '#ddd',
               hoverBorderColor: '#666666',
               data: count
             }
