@@ -123,11 +123,15 @@ nav{
     overflow: auto;
     float: left;
     padding-top: 0;
+    padding: 0;
 }
 nav ul{
     list-style-type: none;
     margin: auto;
     padding: 0;
+}
+nav li{
+  border-right: 1px solid #bbb;
 }
 nav a{
     display: block;
@@ -155,11 +159,17 @@ nav a.emph{
 nav a.logo:hover{
     background-color: #000000;
 }
-nav a.logo{
+nav .logo{
     width: auto;
+    height: 50px;
+    float: left;
 }
-nav a.logo img{
+nav .logo img{
     height: 100%;
+}
+nav .nav-toggle{
+  cursor: pointer;
+  display: none;
 }
 /*Title*/
 .title {
@@ -389,6 +399,35 @@ input[type=submit] {
   }
   .col-2-width {
     width: 100%;
+  }
+  nav .nav-toggle {
+    display: block;
+    float: right;
+    width: 20%;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin: auto;
+    height: 50px;
+  }
+  nav ul {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100vb;
+    top: 50px;
+    background-color: #FF7171;
+    left: -100%;
+  }
+  nav ul li a {
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
+  nav .logo {
+    width: 100%;
+  }
+  nav .activated{
+    left: 0;
   }
 }
 @media only screen and (max-width: 500px) {

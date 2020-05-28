@@ -36,7 +36,7 @@ function startHTML($title, $description){
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>$title</title>
         <link rel='stylesheet' type='text/css' href='stylesheet.css'>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
         <script src='//cdn.ckeditor.com/4.14.0/full/ckeditor.js'></script>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
         <script src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'></script>
@@ -51,8 +51,11 @@ startHTML;
 function makeNav(){
   $content = <<< makeNAV
   <nav class='nav'>
-    <ul>
-      <li><a class='logo' href=''><img src='assets/img/NS-White-Small.png' alt='logo'></a></li>
+    <div class='logo'><img src='assets/img/NS-White-Small.png' alt='logo'>
+    <div class='nav-toggle'><i class='fa fa-bars' aria-hidden='true'></i></div>
+    </div>
+
+    <ul id='nav-buttons'>
       <li><a href='index.php'>Home</a></li>
       <li><a href='class-timetable.php'>Timetable</a></li>
       <li><a href='class-list.php'>Classes</a></li>
@@ -69,6 +72,13 @@ makeNAV;
   }
   $content .= "</ul>
     </nav>";
+  $content .= "<script type='text/javascript'>
+	$(document).ready(function(){
+		$('.nav-toggle').click(function(){
+			$('#nav-buttons').toggleClass('activated')
+		})
+	})
+</script>";
   $content .= "\n";
   echo $content;
 }
